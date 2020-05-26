@@ -1,9 +1,37 @@
 pipeline {
-    agent { docker { image 'node:6.3' } }
+    agent any
+    environment {
+        PROJECT_ID = 'ninja-gcp-277418'
+        CLUSTER_NAME = 'KUBECLUSTER'
+        LOCATION = 'CLUSTER-LOCATION'
+        CREDENTIALS_ID = 'gke'
+    }
     stages {
-        stage('build') {
+        stage("Checkout code") {
             steps {
-                sh 'npm --version'
+                checkout scm
+            }
+        }
+        stage("Build image") {
+            steps {
+                script {
+                    myapp = docker.build("rajni03/helloworld")
+                }
+            }
+        }
+        stage("Push image") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            myapp.push("latest")
+
+                    }
+                }
+            }
+        }
+        stage('Deploy to GKE') {
+            steps{
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
     }
