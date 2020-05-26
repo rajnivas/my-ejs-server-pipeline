@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'ninja-gcp-277418'
-        CLUSTER_NAME = 'KUBECLUSTER'
-        LOCATION = 'CLUSTER-LOCATION'
+        CLUSTER_NAME = 'kubecluster'
+        LOCATION = 'europe-west4-a'
         CREDENTIALS_ID = 'gke'
     }
     stages {
