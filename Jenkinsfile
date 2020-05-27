@@ -5,7 +5,7 @@ pipeline {
         CLUSTER_NAME = 'kubecluster'
         LOCATION = 'europe-west4-a'
         CREDENTIALS_ID = 'gke'
-        JENKINS_HOME = /home/rajnivas_n/
+        JENKINS_HOME = /home/$USER
     }
     stages {
         stage("Checkout code") {
