@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy to GKE') {
             steps{
-                sh("sudo kubectl run gke_ninja-gcp-277418_europe-west4-a_kubecluster --kubeconfig --image=rajni03/helloworld --port=3000")
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
     }
