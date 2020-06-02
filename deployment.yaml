@@ -25,15 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-name: hello
-labels:
-  app: hello
+  name: hello
 spec:
-ports:
-  - port: 3000
-    targetPort: 3000
-selector:
- matchlabels:
-  app: hello
-  tier: hello
-type: LoadBalancer
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: hello
+  type: LoadBalancer
