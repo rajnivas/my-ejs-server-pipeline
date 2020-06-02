@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: hello
-matchlabels:
-  app: hello
+  name: hello
+  labels:
+    app: hello
 spec:
-template:
-  metadata:
-    labels:
+  replicas: 2
+  selector:
+    matchLabels:
       app: hello
-  spec:
-    containers:
-    - name: hello
-      image: rajni03/helloworld
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 3000
-        name: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: rajni03/helloworld
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+         name: hello
 
 ---
 apiVersion: v1
