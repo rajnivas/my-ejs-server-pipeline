@@ -3,7 +3,7 @@ pipeline {
     environment {
         PROJECT_ID = 'ninja-gcp-277418'
         CLUSTER_NAME = 'kubecluster'
-        LOCATION = 'europe-west4-a'
+        LOCATION = 'europe-west2-c'
         CREDENTIALS_ID = 'gke'
           }
     stages {
